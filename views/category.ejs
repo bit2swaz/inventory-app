@@ -1,0 +1,48 @@
+<div class="page-header">
+  <div class="breadcrumb">
+    <a href="/">Categories</a> &gt; <%= category.name %>
+  </div>
+  <div class="header-actions">
+    <a href="/items/create?category_id=<%= category.id %>" class="btn btn-primary">Add New Item</a>
+    <a href="/categories/<%= category.id %>/update" class="btn btn-outline">Edit Category</a>
+    <a href="/categories/<%= category.id %>/delete" class="btn btn-danger">Delete Category</a>
+  </div>
+</div>
+
+<div class="category-detail">
+  <h2><%= category.name %></h2>
+  <p class="description"><%= category.description %></p>
+</div>
+
+<h3>Items</h3>
+
+<% if (items && items.length > 0) { %>
+  <div class="item-grid">
+    <% items.forEach(item => { %>
+      <div class="item-card">
+        <div class="item-image">
+          <% if (item.image_url) { %>
+            <img src="<%= item.image_url %>" alt="<%= item.name %>">
+          <% } else { %>
+            <div class="no-image">No Image</div>
+          <% } %>
+        </div>
+        <div class="item-details">
+          <h4><a href="/items/<%= item.id %>"><%= item.name %></a></h4>
+          <p class="item-price">$<%= parseFloat(item.price).toFixed(2) %></p>
+          <p class="item-quantity">Quantity: <%= item.quantity %></p>
+          <div class="card-actions">
+            <a href="/items/<%= item.id %>" class="btn btn-secondary">View</a>
+            <a href="/items/<%= item.id %>/update" class="btn btn-outline">Edit</a>
+            <a href="/items/<%= item.id %>/delete" class="btn btn-danger">Delete</a>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+<% } else { %>
+  <div class="empty-state">
+    <p>No items found in this category.</p>
+    <a href="/items/create?category_id=<%= category.id %>" class="btn btn-primary">Add New Item</a>
+  </div>
+<% } %> 

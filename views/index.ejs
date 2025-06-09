@@ -1,0 +1,25 @@
+<div class="page-header">
+  <h2>Categories</h2>
+  <a href="/categories/create" class="btn btn-primary">Add New Category</a>
+</div>
+
+<% if (categories && categories.length > 0) { %>
+  <div class="category-grid">
+    <% categories.forEach(category => { %>
+      <div class="category-card">
+        <h3><a href="/categories/<%= category.id %>"><%= category.name %></a></h3>
+        <p><%= category.description %></p>
+        <div class="card-actions">
+          <a href="/categories/<%= category.id %>" class="btn btn-secondary">View Items</a>
+          <a href="/categories/<%= category.id %>/update" class="btn btn-outline">Edit</a>
+          <a href="/categories/<%= category.id %>/delete" class="btn btn-danger">Delete</a>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+<% } else { %>
+  <div class="empty-state">
+    <p>No categories found. Start by adding a new category.</p>
+    <a href="/categories/create" class="btn btn-primary">Add New Category</a>
+  </div>
+<% } %> 

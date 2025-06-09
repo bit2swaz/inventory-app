@@ -1,0 +1,53 @@
+<div class="page-header">
+  <div class="breadcrumb">
+    <a href="/">Categories</a> &gt; 
+    <a href="/categories/<%= item.category_id %>"><%= item.category_name %></a> &gt; 
+    <%= item.name %>
+  </div>
+  <div class="header-actions">
+    <a href="/items/<%= item.id %>/update" class="btn btn-outline">Edit Item</a>
+    <a href="/items/<%= item.id %>/delete" class="btn btn-danger">Delete Item</a>
+  </div>
+</div>
+
+<div class="item-detail">
+  <div class="item-detail-image">
+    <% if (item.image_url) { %>
+      <img src="<%= item.image_url %>" alt="<%= item.name %>">
+    <% } else { %>
+      <div class="no-image large">No Image</div>
+    <% } %>
+  </div>
+  
+  <div class="item-detail-info">
+    <h2><%= item.name %></h2>
+    
+    <div class="item-meta">
+      <div class="meta-group">
+        <span class="meta-label">Price:</span>
+        <span class="meta-value price">$<%= parseFloat(item.price).toFixed(2) %></span>
+      </div>
+      
+      <div class="meta-group">
+        <span class="meta-label">Quantity:</span>
+        <span class="meta-value quantity"><%= item.quantity %></span>
+      </div>
+      
+      <div class="meta-group">
+        <span class="meta-label">Category:</span>
+        <span class="meta-value"><a href="/categories/<%= item.category_id %>"><%= item.category_name %></a></span>
+      </div>
+    </div>
+    
+    <div class="item-description">
+      <h3>Description</h3>
+      <p><%= item.description %></p>
+    </div>
+    
+    <div class="item-actions">
+      <a href="/items/<%= item.id %>/update" class="btn btn-primary">Edit</a>
+      <a href="/items/<%= item.id %>/delete" class="btn btn-danger">Delete</a>
+      <a href="/categories/<%= item.category_id %>" class="btn btn-secondary">Back to Category</a>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,53 @@
+<div class="error-container">
+  <h2>Server Error</h2>
+  <p>Something went wrong on our end. Please try again later.</p>
+  <% if (process.env.NODE_ENV !== 'production' && error) { %>
+    <div class="error-details">
+      <h3>Error Details</h3>
+      <pre><%= error.stack %></pre>
+    </div>
+  <% } %>
+  <a href="/" class="btn btn-primary">Return to Home</a>
+</div>
+
+<style>
+  .error-container {
+    text-align: center;
+    padding: 3rem 1rem;
+    background-color: var(--surface);
+    border-radius: var(--radius);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .error-container h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--error);
+  }
+  
+  .error-container p {
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
+  }
+  
+  .error-details {
+    text-align: left;
+    background-color: var(--surface-light);
+    padding: 1rem;
+    border-radius: var(--radius);
+    margin-bottom: 2rem;
+    overflow: auto;
+  }
+  
+  .error-details h3 {
+    color: var(--error);
+    margin-bottom: 0.5rem;
+  }
+  
+  .error-details pre {
+    font-family: monospace;
+    white-space: pre-wrap;
+    color: var(--text-secondary);
+  }
+</style> 

@@ -1,0 +1,43 @@
+<div class="page-header">
+  <div class="breadcrumb">
+    <a href="/">Categories</a>
+    <% if (itemType === 'item') { %>
+      &gt; <a href="/categories/<%= item.category_id %>"><%= item.category_name %></a>
+    <% } %>
+    &gt; Delete <%= itemType === 'category' ? 'Category' : 'Item' %>
+  </div>
+</div>
+
+<div class="form-container">
+  <h2>Delete <%= itemType === 'category' ? 'Category' : 'Item' %></h2>
+  
+  <div class="alert alert-warning">
+    <h3>Warning!</h3>
+    <p>Are you sure you want to delete "<%= item.name %>"?</p>
+    
+    <% if (itemType === 'category' && typeof hasItems !== 'undefined' && hasItems) { %>
+      <p class="warning-text">This category contains items. Deleting it will also delete all associated items.</p>
+    <% } %>
+    
+    <p>This action cannot be undone.</p>
+  </div>
+  
+  <form method="POST" action="<%= itemType === 'category' ? `/categories/${item.id}/delete` : `/items/${item.id}/delete` %>">
+    <div class="form-group">
+      <label for="password">Admin Password</label>
+      <input 
+        type="password" 
+        id="password" 
+        name="password" 
+        required
+      >
+    </div>
+    
+    <div class="form-actions">
+      <button type="submit" class="btn btn-danger">
+        Confirm Delete
+      </button>
+      <a href="<%= itemType === 'category' ? `/categories/${item.id}` : `/items/${item.id}` %>" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</div> 
