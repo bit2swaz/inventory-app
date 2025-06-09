@@ -1,0 +1,52 @@
+<div class="breadcrumb">
+  <a href="/">Home</a> &gt; <%= category.name %>
+</div>
+
+<section class="category-details">
+  <div class="section-header">
+    <h2><%= category.name %></h2>
+    <div class="action-buttons">
+      <a href="/category/<%= category.id %>/update" class="btn btn-secondary">Edit Category</a>
+      <a href="/category/<%= category.id %>/delete" class="btn btn-danger">Delete Category</a>
+    </div>
+  </div>
+  
+  <p class="category-description"><%= category.description %></p>
+  
+  <div class="section-header">
+    <h3>Items</h3>
+    <a href="/item/new" class="btn btn-primary">Add New Item</a>
+  </div>
+  
+  <% if (items.length === 0) { %>
+    <div class="empty-state">
+      <p>No items found in this category. Add your first item!</p>
+    </div>
+  <% } else { %>
+    <div class="item-grid">
+      <% items.forEach(item => { %>
+        <div class="item-card">
+          <% if (item.image_url) { %>
+            <div class="item-image">
+              <img src="<%= item.image_url %>" alt="<%= item.name %>">
+            </div>
+          <% } else { %>
+            <div class="item-image placeholder">
+              <div class="no-image">No Image</div>
+            </div>
+          <% } %>
+          <div class="item-content">
+            <h3><%= item.name %></h3>
+            <p class="item-price">$<%= item.price %></p>
+            <p class="item-quantity">Qty: <%= item.quantity %></p>
+          </div>
+          <div class="item-actions">
+            <a href="/item/<%= item.id %>" class="btn">View</a>
+            <a href="/item/<%= item.id %>/update" class="btn btn-secondary">Edit</a>
+            <a href="/item/<%= item.id %>/delete" class="btn btn-danger">Delete</a>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  <% } %>
+</section> 

@@ -1,0 +1,41 @@
+<div class="breadcrumb">
+  <a href="/">Home</a> &gt; 
+  <% if (type === 'category') { %>
+    <a href="/category/<%= item.id %>"><%= item.name %></a> &gt; Delete
+  <% } else { %>
+    <a href="/category/<%= item.category_id %>"><%= item.category_name %></a> &gt; 
+    <a href="/item/<%= item.id %>"><%= item.name %></a> &gt; Delete
+  <% } %>
+</div>
+
+<section class="delete-confirmation">
+  <div class="warning-box">
+    <h2>Delete <%= type === 'category' ? 'Category' : 'Item' %></h2>
+    
+    <% if (type === 'category') { %>
+      <p class="warning-text">Are you sure you want to delete the category "<%= item.name %>"?</p>
+      <p class="warning-subtext"><strong>Warning:</strong> This will also delete all items in this category!</p>
+    <% } else { %>
+      <p class="warning-text">Are you sure you want to delete the item "<%= item.name %>"?</p>
+    <% } %>
+    
+    <% if (error) { %>
+      <div class="error-message">
+        <%= error %>
+      </div>
+    <% } %>
+    
+    <form method="POST" action="<%= type === 'category' ? `/category/${item.id}/delete` : `/item/${item.id}/delete` %>">
+      <div class="form-group">
+        <label for="admin_password">Admin Password</label>
+        <input type="password" id="admin_password" name="admin_password" required>
+        <small>Enter admin password to confirm deletion</small>
+      </div>
+      
+      <div class="form-actions">
+        <a href="<%= type === 'category' ? `/category/${item.id}` : `/item/${item.id}` %>" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </div>
+    </form>
+  </div>
+</section> 
