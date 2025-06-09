@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><%= category.name %></h1>
+      <p class="description"><%= category.description %></p>
+    </header>
+    
+    <main>
+      <h2>Items in this category</h2>
+      
+      <div class="items-list">
+        <% if (items && items.length > 0) { %>
+          <% items.forEach(item => { %>
+            <div class="item-card">
+              <h3><a href="/items/<%= item.id %>"><%= item.name %></a></h3>
+              <p><%= item.description %></p>
+              <p class="price">$<%= parseFloat(item.price).toFixed(2) %></p>
+              <p class="stock">In Stock: <%= item.stock %></p>
+              <a href="/items/<%= item.id %>" class="btn btn-small">View Details</a>
+            </div>
+          <% }); %>
+        <% } else { %>
+          <p>No items found in this category.</p>
+        <% } %>
+      </div>
+      
+      <div class="navigation">
+        <a href="/categories" class="btn">Back to Categories</a>
+        <a href="/" class="btn">Back to Home</a>
+      </div>
+      
+      <div class="theme-toggle">
+        <button id="theme-switch" class="btn">Toggle Dark Mode</button>
+      </div>
+    </main>
+    
+    <footer>
+      <p>made with ❤ by <a href="https://github.com/bit2swaz" target="_blank">bit2swaz</a></p>
+    </footer>
+  </div>
+  
+  <script src="/js/theme.js"></script>
+</body>
+</html> 

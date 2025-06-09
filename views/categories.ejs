@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Categories</h1>
+    </header>
+    
+    <main>
+      <div class="categories-list">
+        <% if (categories && categories.length > 0) { %>
+          <% categories.forEach(category => { %>
+            <div class="category-card">
+              <h2><a href="/categories/<%= category.id %>"><%= category.name %></a></h2>
+              <p><%= category.description %></p>
+              <a href="/categories/<%= category.id %>" class="btn btn-small">View Items</a>
+            </div>
+          <% }); %>
+        <% } else { %>
+          <p>No categories found.</p>
+        <% } %>
+      </div>
+      
+      <div class="navigation">
+        <a href="/" class="btn">Back to Home</a>
+        <a href="/items" class="btn">View All Items</a>
+      </div>
+      
+      <div class="theme-toggle">
+        <button id="theme-switch" class="btn">Toggle Dark Mode</button>
+      </div>
+    </main>
+    
+    <footer>
+      <p>made with ❤ by <a href="https://github.com/bit2swaz" target="_blank">bit2swaz</a></p>
+    </footer>
+  </div>
+  
+  <script src="/js/theme.js"></script>
+</body>
+</html> 
