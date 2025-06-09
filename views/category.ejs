@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-  <link rel="stylesheet" href="/css/style.css">
+  <%- include('partials/head') %>
 </head>
 <body>
   <div class="container">
     <header>
       <h1><%= category.name %></h1>
+      <%- include('partials/navigation') %>
       <div class="category-description">
         <p><%= category.description %></p>
       </div>
@@ -21,7 +19,6 @@
           <a href="/items/new" class="btn btn-success">Add New Item</a>
           <a href="/categories/<%= category.id %>/edit" class="btn btn-primary">Edit Category</a>
           <a href="/categories/<%= category.id %>/confirm-delete" class="btn btn-danger">Delete Category</a>
-          <a href="/admin/logout" class="btn">Logout</a>
         </div>
       <% } %>
       
@@ -44,7 +41,7 @@
             </div>
           <% }); %>
         <% } else { %>
-          <p>No items found in this category.</p>
+          <p>No items found in this category. <% if (isAdmin) { %><a href="/items/new" class="btn btn-small btn-success">Add New Item</a><% } %></p>
         <% } %>
       </div>
       
@@ -58,9 +55,7 @@
       </div>
     </main>
     
-    <footer>
-      <p>made with ❤ by <a href="https://github.com/bit2swaz" target="_blank">bit2swaz</a></p>
-    </footer>
+    <%- include('partials/footer') %>
   </div>
   
   <script src="/js/theme.js"></script>

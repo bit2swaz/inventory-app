@@ -1,34 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-  <link rel="stylesheet" href="/css/style.css">
+  <%- include('partials/head') %>
 </head>
 <body>
   <div class="container">
     <header>
       <h1><%= message %></h1>
+      <%- include('partials/navigation') %>
     </header>
-    
+
     <main>
-      <% if (!isAdmin) { %>
-        <div class="admin-actions">
-          <a href="/admin/auth" class="btn btn-primary">Admin Login</a>
-        </div>
-      <% } else { %>
+      <% if (isAdmin) { %>
         <div class="admin-actions">
           <a href="/categories/new" class="btn btn-success">Create New Category</a>
           <a href="/items/new" class="btn btn-success">Create New Item</a>
-          <a href="/admin/logout" class="btn btn-danger">Logout</a>
         </div>
       <% } %>
       
       <p class="intro-text">
         Browse our inventory of tech gadgets by category
       </p>
-      
+
       <div class="home-categories">
         <h2>Categories</h2>
         <div class="categories-list">
@@ -61,10 +54,8 @@
         <button id="theme-switch" class="btn">Toggle Dark Mode</button>
       </div>
     </main>
-    
-    <footer>
-      <p>made with ❤ by <a href="https://github.com/bit2swaz" target="_blank">bit2swaz</a></p>
-    </footer>
+
+    <%- include('partials/footer') %>
   </div>
   
   <script src="/js/theme.js"></script>

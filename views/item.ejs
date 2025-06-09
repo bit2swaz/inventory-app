@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-  <link rel="stylesheet" href="/css/style.css">
+  <%- include('partials/head') %>
 </head>
 <body>
   <div class="container">
     <header>
       <h1><%= item.name %></h1>
+      <%- include('partials/navigation') %>
     </header>
     
     <main>
@@ -18,7 +16,6 @@
           <div class="admin-actions">
             <a href="/items/<%= item.id %>/edit" class="btn btn-primary">Edit Item</a>
             <a href="/items/<%= item.id %>/confirm-delete" class="btn btn-danger">Delete Item</a>
-            <a href="/admin/logout" class="btn">Logout</a>
           </div>
         <% } %>
         
@@ -32,23 +29,9 @@
           <p class="added">Added on: <%= new Date(item.added_at).toLocaleDateString() %></p>
         </div>
       </div>
-      
-      <div class="navigation">
-        <a href="/categories/<%= item.category_id %>" class="btn">Back to Category</a>
-        <a href="/items" class="btn">All Items</a>
-        <a href="/" class="btn">Home</a>
-      </div>
-      
-      <div class="theme-toggle">
-        <button id="theme-switch" class="btn">Toggle Dark Mode</button>
-      </div>
     </main>
     
-    <footer>
-      <p>made with ❤ by <a href="https://github.com/bit2swaz" target="_blank">bit2swaz</a></p>
-    </footer>
+    <%- include('partials/footer') %>
   </div>
-  
-  <script src="/js/theme.js"></script>
 </body>
 </html> 

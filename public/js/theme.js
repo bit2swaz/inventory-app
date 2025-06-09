@@ -1,35 +1,52 @@
-// Theme toggle functionality
+/**
+ * Theme switcher functionality
+ */
 document.addEventListener('DOMContentLoaded', function() {
   const themeSwitch = document.getElementById('theme-switch');
-  const body = document.body;
+  const themeIcon = themeSwitch ? themeSwitch.querySelector('.theme-icon') : null;
   
-  if (!themeSwitch) return;
-  
-  // Check for saved theme preference or prefer-color-scheme
+  // Check if dark theme is preferred from saved preference or OS
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
   const savedTheme = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   
-  // Apply dark theme if saved or preferred
-  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-    body.classList.add('dark-theme');
+  // Apply theme based on saved preference or OS setting
+  if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
+    document.body.classList.add('dark-theme');
+    updateThemeIcon('🌞');
   }
   
-  // Update button text based on current theme
-  if (body.classList.contains('dark-theme')) {
-    themeSwitch.textContent = 'Switch to Light Mode';
+  // Handle theme toggle click
+  if (themeSwitch) {
+    themeSwitch.addEventListener('click', function() {
+      if (document.body.classList.contains('dark-theme')) {
+        document.body.classList.remove('dark-theme');
+        localStorage.setItem('theme', 'light');
+        updateThemeIcon('🌙');
+      } else {
+        document.body.classList.add('dark-theme');
+        localStorage.setItem('theme', 'dark');
+        updateThemeIcon('🌞');
+      }
+    });
   }
   
-  // Toggle theme when button is clicked
-  themeSwitch.addEventListener('click', () => {
-    body.classList.toggle('dark-theme');
-    
-    // Save preference to localStorage
-    if (body.classList.contains('dark-theme')) {
-      localStorage.setItem('theme', 'dark');
-      themeSwitch.textContent = 'Switch to Light Mode';
-    } else {
-      localStorage.setItem('theme', 'light');
-      themeSwitch.textContent = 'Switch to Dark Mode';
+  // Update theme icon based on current theme
+  function updateThemeIcon(icon) {
+    if (themeIcon) {
+      themeIcon.textContent = icon;
+    }
+  }
+  
+  // Listen for OS theme changes
+  prefersDarkScheme.addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      if (e.matches) {
+        document.body.classList.add('dark-theme');
+        updateThemeIcon('🌞');
+      } else {
+        document.body.classList.remove('dark-theme');
+        updateThemeIcon('🌙');
+      }
     }
   });
 }); 

@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-  <link rel="stylesheet" href="/css/style.css">
+  <%- include('partials/head') %>
 </head>
 <body>
   <div class="container">
     <header>
       <h1>All Items</h1>
+      <%- include('partials/navigation') %>
     </header>
     
     <main>
@@ -17,7 +15,6 @@
         <div class="admin-actions">
           <a href="/items/new" class="btn btn-success">Create New Item</a>
           <a href="/categories/new" class="btn btn-success">Create New Category</a>
-          <a href="/admin/logout" class="btn btn-danger">Logout</a>
         </div>
       <% } %>
       
@@ -39,7 +36,7 @@
             </div>
           <% }); %>
         <% } else { %>
-          <p>No items found.</p>
+          <p>No items found. <% if (isAdmin) { %><a href="/items/new" class="btn btn-small btn-success">Create New Item</a><% } %></p>
         <% } %>
       </div>
       
@@ -53,9 +50,7 @@
       </div>
     </main>
     
-    <footer>
-      <p>made with ❤ by <a href="https://github.com/bit2swaz" target="_blank">bit2swaz</a></p>
-    </footer>
+    <%- include('partials/footer') %>
   </div>
   
   <script src="/js/theme.js"></script>

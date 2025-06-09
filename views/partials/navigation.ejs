@@ -1,0 +1,21 @@
+<nav class="main-nav">
+  <div class="nav-links">
+    <a href="/" class="nav-link">Home</a>
+    <a href="/categories" class="nav-link">Categories</a>
+    <a href="/items" class="nav-link">All Items</a>
+  </div>
+  <div class="nav-auth">
+    <% if (!isAdmin) { %>
+      <a href="/admin/auth" class="btn btn-sm">Admin Login</a>
+    <% } else { %>
+      <a href="/admin/logout" class="btn btn-sm btn-danger">Logout</a>
+    <% } %>
+  </div>
+</nav>
+
+<div class="theme-toggle">
+  <button id="theme-switch" class="btn btn-sm" aria-label="Toggle dark/light mode">
+    <span class="theme-icon">🌙</span>
+    <span class="theme-label">Toggle Theme</span>
+  </button>
+</div> 
