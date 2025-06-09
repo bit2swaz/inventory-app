@@ -13,8 +13,17 @@ router.get('/auth', (req, res) => {
 });
 
 // POST admin authentication
-router.post('/auth', (req, res, next) => {
-  if (req.body.adminPassword === process.env.ADMIN_PASSWORD) {
+router.post('/auth', (req, res) => {
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  if (!adminPassword) {
+    console.error('ADMIN_PASSWORD not set in environment variables');
+    return res.status(500).render('error', {
+      message: 'Server configuration error',
+      error: { status: 500, stack: 'ADMIN_PASSWORD not configured' }
+    });
+  }
+
+  if (req.body.adminPassword === adminPassword) {
     // Set admin session
     req.session.isAdmin = true;
     
@@ -33,6 +42,7 @@ router.post('/auth', (req, res, next) => {
 
 // Logout route
 router.get('/logout', (req, res) => {
+  // Clear admin session
   req.session.isAdmin = false;
   res.redirect('/');
 });

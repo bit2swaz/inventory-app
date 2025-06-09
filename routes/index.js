@@ -31,38 +31,38 @@ router.get('/', async (req, res) => {
 // Read operations (public)
 router.get('/categories', categoryController.getAllCategories);
 
-// Create operations (admin only)
+// Create operations (admin only) - must come before /:id routes
 router.get('/categories/new', isAdmin, categoryController.createCategoryForm);
 router.post('/categories', isAdmin, categoryController.createCategory);
 
-// Category detail - must come after other specific routes
-router.get('/categories/:id', categoryController.getCategoryById);
+// Category detail - must come after /new route
+router.get('/categories/:id([0-9]+)', categoryController.getCategoryById);
 
 // Update operations (admin only)
-router.get('/categories/:id/edit', isAdmin, categoryController.updateCategoryForm);
-router.post('/categories/:id/update', isAdmin, categoryController.updateCategory);
+router.get('/categories/:id([0-9]+)/edit', isAdmin, categoryController.updateCategoryForm);
+router.post('/categories/:id([0-9]+)/update', isAdmin, categoryController.updateCategory);
 
 // Delete operations (admin only)
-router.get('/categories/:id/confirm-delete', isAdmin, categoryController.deleteCategoryForm);
-router.post('/categories/:id/delete', isAdmin, categoryController.deleteCategory);
+router.get('/categories/:id([0-9]+)/confirm-delete', isAdmin, categoryController.deleteCategoryForm);
+router.post('/categories/:id([0-9]+)/delete', isAdmin, categoryController.deleteCategory);
 
 /* Items routes */
 // Read operations (public)
 router.get('/items', itemController.getAllItems);
 
-// Create operations (admin only)
+// Create operations (admin only) - must come before /:id routes
 router.get('/items/new', isAdmin, itemController.createItemForm);
 router.post('/items', isAdmin, itemController.createItem);
 
-// Item detail - must come after other specific routes
-router.get('/items/:id', itemController.getItemById);
+// Item detail - must come after /new route
+router.get('/items/:id([0-9]+)', itemController.getItemById);
 
 // Update operations (admin only)
-router.get('/items/:id/edit', isAdmin, itemController.updateItemForm);
-router.post('/items/:id/update', isAdmin, itemController.updateItem);
+router.get('/items/:id([0-9]+)/edit', isAdmin, itemController.updateItemForm);
+router.post('/items/:id([0-9]+)/update', isAdmin, itemController.updateItem);
 
 // Delete operations (admin only)
-router.get('/items/:id/confirm-delete', isAdmin, itemController.deleteItemForm);
-router.post('/items/:id/delete', isAdmin, itemController.deleteItem);
+router.get('/items/:id([0-9]+)/confirm-delete', isAdmin, itemController.deleteItemForm);
+router.post('/items/:id([0-9]+)/delete', isAdmin, itemController.deleteItem);
 
 module.exports = router; 

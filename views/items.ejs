@@ -26,7 +26,7 @@
           <% items.forEach(item => { %>
             <div class="item-card">
               <h3><a href="/items/<%= item.id %>"><%= item.name %></a></h3>
-              <p class="price">$<%= item.price.toFixed(2) %></p>
+              <p class="price">$<%= parseFloat(item.price).toFixed(2) %></p>
               <p class="stock">Stock: <%= item.stock %></p>
               <p class="category">Category: <%= item.category_name %></p>
               <a href="/items/<%= item.id %>" class="btn btn-small">View Details</a>

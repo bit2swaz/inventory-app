@@ -27,7 +27,7 @@ app.use(session({
 
 // Pass session info to views
 app.use((req, res, next) => {
-  res.locals.isAdmin = req.session.isAdmin || false;
+  res.locals.isAdmin = req.session && req.session.isAdmin || false;
   next();
 });
 
@@ -37,12 +37,30 @@ const adminRouter = require('./routes/admin');
 app.use('/', indexRouter);
 app.use('/admin', adminRouter);
 
+// 404 handler
+app.use((req, res, next) => {
+  res.status(404).render('error', {
+    message: 'Page Not Found',
+    error: { status: 404, stack: process.env.NODE_ENV === 'development' ? `The requested URL ${req.url} was not found on this server.` : '' }
+  });
+});
+
 // Error handler
 app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.render('error', {
+  // Set locals, only providing error in development
+  const status = err.status || 500;
+  const errorDetails = {
     message: err.message,
-    error: process.env.NODE_ENV === 'development' ? err : {}
+    status: status,
+    stack: process.env.NODE_ENV === 'development' ? err.stack : ''
+  };
+  
+  console.error('Error:', err);
+  
+  res.status(status);
+  res.render('error', {
+    message: 'An error occurred',
+    error: errorDetails
   });
 });
 

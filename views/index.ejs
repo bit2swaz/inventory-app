@@ -29,7 +29,7 @@
         Browse our inventory of tech gadgets by category
       </p>
       
-      <section class="home-categories">
+      <div class="home-categories">
         <h2>Categories</h2>
         <div class="categories-list">
           <% if (categories && categories.length > 0) { %>
@@ -47,10 +47,10 @@
               </div>
             <% }); %>
           <% } else { %>
-            <p>No categories found.</p>
+            <p>No categories found. <% if (isAdmin) { %><a href="/categories/new">Create one</a><% } %></p>
           <% } %>
         </div>
-      </section>
+      </div>
       
       <div class="navigation home-nav">
         <a href="/categories" class="btn">All Categories</a>
