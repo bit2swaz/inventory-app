@@ -2,15 +2,33 @@ services:
   - type: web
     name: tech-gadget-inventory
     env: node
-    buildCommand: npm install
+    buildCommand: npm install && npm run init-db
     startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
-      - key: DATABASE_URL
+      - key: DB_HOST
         fromDatabase:
           name: gadget-inventory-db
-          property: connectionString
+          property: host
+      - key: DB_NAME
+        fromDatabase:
+          name: gadget-inventory-db
+          property: database
+      - key: DB_PORT
+        fromDatabase:
+          name: gadget-inventory-db
+          property: port
+      - key: DB_USER
+        fromDatabase:
+          name: gadget-inventory-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: gadget-inventory-db
+          property: password
+      - key: PORT
+        value: 3000
 
 databases:
   - name: gadget-inventory-db

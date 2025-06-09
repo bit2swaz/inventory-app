@@ -2,7 +2,9 @@ require('dotenv').config({ path: '../.env' });
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  host: 'localhost',
+  database: 'gadget_inventory',
+  port: 5432,
   ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 });
 
