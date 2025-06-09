@@ -1,25 +1,24 @@
-<div class="page-header">
-  <h2>Categories</h2>
-  <a href="/categories/create" class="btn btn-primary">Add New Category</a>
-</div>
-
-<% if (categories && categories.length > 0) { %>
-  <div class="category-grid">
-    <% categories.forEach(category => { %>
-      <div class="category-card">
-        <h3><a href="/categories/<%= category.id %>"><%= category.name %></a></h3>
-        <p><%= category.description %></p>
-        <div class="card-actions">
-          <a href="/categories/<%= category.id %>" class="btn btn-secondary">View Items</a>
-          <a href="/categories/<%= category.id %>/update" class="btn btn-outline">Edit</a>
-          <a href="/categories/<%= category.id %>/delete" class="btn btn-danger">Delete</a>
-        </div>
-      </div>
-    <% }); %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><%= message %></h1>
+    </header>
+    
+    <main>
+      <p>Your inventory management system</p>
+    </main>
+    
+    <footer>
+      <p>made with ❤ <a href="https://github.com/bit2swaz" target="_blank">bit2swaz</a></p>
+    </footer>
   </div>
-<% } else { %>
-  <div class="empty-state">
-    <p>No categories found. Start by adding a new category.</p>
-    <a href="/categories/create" class="btn btn-primary">Add New Category</a>
-  </div>
-<% } %> 
+</body>
+</html> 
