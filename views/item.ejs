@@ -14,19 +14,29 @@
     
     <main>
       <div class="item-details">
-        <div class="item-info">
-          <p class="description"><%= item.description %></p>
+        <% if (isAdmin) { %>
+          <div class="admin-actions">
+            <a href="/items/<%= item.id %>/edit" class="btn btn-primary">Edit Item</a>
+            <a href="/items/<%= item.id %>/confirm-delete" class="btn btn-danger">Delete Item</a>
+            <a href="/admin/logout" class="btn">Logout</a>
+          </div>
+        <% } %>
+        
+        <h2>Details</h2>
+        <p class="description"><%= item.description %></p>
+        
+        <div class="item-meta">
+          <p class="price">Price: $<%= item.price.toFixed(2) %></p>
+          <p class="stock">Stock: <%= item.stock %> units</p>
           <p class="category">Category: <a href="/categories/<%= item.category_id %>"><%= item.category_name %></a></p>
-          <p class="price">Price: $<%= parseFloat(item.price).toFixed(2) %></p>
-          <p class="stock">In Stock: <%= item.stock %></p>
-          <p class="added">Added: <%= new Date(item.added_at).toLocaleDateString() %></p>
+          <p class="added">Added on: <%= new Date(item.added_at).toLocaleDateString() %></p>
         </div>
       </div>
       
       <div class="navigation">
-        <a href="/items" class="btn">Back to Items</a>
-        <a href="/categories/<%= item.category_id %>" class="btn">View Category</a>
-        <a href="/" class="btn">Back to Home</a>
+        <a href="/categories/<%= item.category_id %>" class="btn">Back to Category</a>
+        <a href="/items" class="btn">All Items</a>
+        <a href="/" class="btn">Home</a>
       </div>
       
       <div class="theme-toggle">

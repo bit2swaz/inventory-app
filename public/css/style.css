@@ -17,11 +17,18 @@
   --secondary-color: #2c3e50;
   --secondary-dark: #1a252f;
   --success-color: #27ae60;
+  --warning-color: #f39c12;
+  --danger-color: #e74c3c;
+  --info-color: #3498db;
+  --error-color: #e74c3c;
   --muted-color: #7f8c8d;
   --border-radius: 5px;
   --shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   --hover-transform: translateY(-5px);
   --footer-color: #555;
+  --input-border: #ddd;
+  --input-bg: #fff;
+  --input-focus-border: #3498db;
 }
 
 .dark-theme {
@@ -36,8 +43,15 @@
   --secondary-color: #34495e;
   --secondary-dark: #2c3e50;
   --success-color: #2ecc71;
+  --warning-color: #f1c40f;
+  --danger-color: #e74c3c;
+  --info-color: #3498db;
+  --error-color: #e74c3c;
   --muted-color: #95a5a6;
   --shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --input-border: #444;
+  --input-bg: #333;
+  --input-focus-border: #3498db;
 }
 
 body {
@@ -153,6 +167,22 @@ footer a:hover {
   padding: 8px 16px;
   font-size: 0.9rem;
   margin-top: 10px;
+}
+
+.btn-danger {
+  background-color: var(--danger-color);
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+}
+
+.btn-success {
+  background-color: var(--success-color);
+}
+
+.btn-success:hover {
+  background-color: #27ae60;
 }
 
 /* Categories */
@@ -290,6 +320,126 @@ footer a:hover {
   margin-bottom: 25px;
 }
 
+/* Form styling */
+.form-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--input-border);
+  border-radius: var(--border-radius);
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.form-group input:focus, 
+.form-group select:focus, 
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--input-focus-border);
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Auth form */
+.auth-form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+/* Admin actions */
+.admin-actions {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Confirm delete */
+.confirm-delete {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.confirm-delete .form-actions {
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.warning-message {
+  margin-top: 10px;
+  color: var(--warning-color);
+}
+
+/* Alert messages */
+.alert {
+  padding: 15px;
+  border-radius: var(--border-radius);
+  margin-bottom: 20px;
+}
+
+.alert-error {
+  background-color: rgba(231, 76, 60, 0.1);
+  border: 1px solid var(--error-color);
+  color: var(--error-color);
+}
+
+.alert-success {
+  background-color: rgba(46, 204, 113, 0.1);
+  border: 1px solid var(--success-color);
+  color: var(--success-color);
+}
+
+.alert-info {
+  background-color: rgba(52, 152, 219, 0.1);
+  border: 1px solid var(--info-color);
+  color: var(--info-color);
+}
+
+.alert-warning {
+  background-color: rgba(241, 196, 15, 0.1);
+  border: 1px solid var(--warning-color);
+  color: var(--text-color);
+}
+
 /* Responsiveness */
 @media (max-width: 768px) {
   .container {
@@ -321,6 +471,10 @@ footer a:hover {
   .navigation {
     justify-content: center;
   }
+  
+  .form-container, .auth-form, .confirm-delete {
+    padding: 15px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -346,5 +500,9 @@ footer a:hover {
   
   .btn-primary {
     padding: 10px 20px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
   }
 } 

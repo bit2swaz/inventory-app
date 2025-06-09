@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirm Delete</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Confirm Delete</h1>
+    </header>
+    
+    <main>
+      <div class="confirm-delete">
+        <div class="alert alert-warning">
+          <p>Are you sure you want to delete <%= itemName %>?</p>
+          <% if (warning) { %>
+            <p class="warning-message"><strong>Warning:</strong> <%= warning %></p>
+          <% } %>
+        </div>
+        
+        <div class="form-actions">
+          <form action="<%= deleteUrl %>" method="POST">
+            <button type="submit" class="btn btn-danger">Yes, Delete</button>
+            <a href="<%= cancelUrl %>" class="btn">Cancel</a>
+          </form>
+        </div>
+      </div>
+    </main>
+    
+    <footer>
+      <p>made with ❤ by <a href="https://github.com/bit2swaz" target="_blank">bit2swaz</a></p>
+    </footer>
+  </div>
+  
+  <script src="/js/theme.js"></script>
+</body>
+</html> 

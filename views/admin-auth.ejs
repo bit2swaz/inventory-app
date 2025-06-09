@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Admin Authentication</h1>
+    </header>
+    
+    <main>
+      <div class="auth-form">
+        <% if (message) { %>
+          <div class="alert <%= message.includes('Incorrect') ? 'alert-error' : 'alert-info' %>">
+            <%= message %>
+          </div>
+        <% } %>
+        
+        <form action="/admin/auth" method="POST">
+          <div class="form-group">
+            <label for="adminPassword">Admin Password</label>
+            <input type="password" id="adminPassword" name="adminPassword" required>
+          </div>
+          
+          <input type="hidden" name="originalUrl" value="<%= originalUrl %>">
+          
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="/" class="btn">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </main>
+    
+    <footer>
+      <p>made with ❤ by <a href="https://github.com/bit2swaz" target="_blank">bit2swaz</a></p>
+    </footer>
+  </div>
+  
+  <script src="/js/theme.js"></script>
+</body>
+</html> 

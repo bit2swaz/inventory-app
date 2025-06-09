@@ -13,10 +13,24 @@
     </header>
     
     <main>
-      <p class="intro-text">Your inventory management system</p>
+      <% if (!isAdmin) { %>
+        <div class="admin-actions">
+          <a href="/admin/auth" class="btn btn-primary">Admin Login</a>
+        </div>
+      <% } else { %>
+        <div class="admin-actions">
+          <a href="/categories/new" class="btn btn-success">Create New Category</a>
+          <a href="/items/new" class="btn btn-success">Create New Item</a>
+          <a href="/admin/logout" class="btn btn-danger">Logout</a>
+        </div>
+      <% } %>
+      
+      <p class="intro-text">
+        Browse our inventory of tech gadgets by category
+      </p>
       
       <section class="home-categories">
-        <h2>Browse Categories</h2>
+        <h2>Categories</h2>
         <div class="categories-list">
           <% if (categories && categories.length > 0) { %>
             <% categories.forEach(category => { %>
@@ -24,6 +38,12 @@
                 <h3><a href="/categories/<%= category.id %>"><%= category.name %></a></h3>
                 <p><%= category.description %></p>
                 <a href="/categories/<%= category.id %>" class="btn btn-small">View Items</a>
+                <% if (isAdmin) { %>
+                  <div class="admin-item-actions">
+                    <a href="/categories/<%= category.id %>/edit" class="btn btn-small">Edit</a>
+                    <a href="/categories/<%= category.id %>/confirm-delete" class="btn btn-small btn-danger">Delete</a>
+                  </div>
+                <% } %>
               </div>
             <% }); %>
           <% } else { %>
@@ -33,8 +53,8 @@
       </section>
       
       <div class="navigation home-nav">
-        <a href="/categories" class="btn btn-primary">All Categories</a>
-        <a href="/items" class="btn btn-primary">All Items</a>
+        <a href="/categories" class="btn">All Categories</a>
+        <a href="/items" class="btn">All Items</a>
       </div>
       
       <div class="theme-toggle">

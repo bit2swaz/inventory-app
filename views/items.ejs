@@ -9,20 +9,33 @@
 <body>
   <div class="container">
     <header>
-      <h1>Inventory Items</h1>
+      <h1>All Items</h1>
     </header>
     
     <main>
+      <% if (isAdmin) { %>
+        <div class="admin-actions">
+          <a href="/items/new" class="btn btn-success">Create New Item</a>
+          <a href="/categories/new" class="btn btn-success">Create New Category</a>
+          <a href="/admin/logout" class="btn btn-danger">Logout</a>
+        </div>
+      <% } %>
+      
       <div class="items-list">
         <% if (items && items.length > 0) { %>
           <% items.forEach(item => { %>
             <div class="item-card">
-              <h2><a href="/items/<%= item.id %>"><%= item.name %></a></h2>
-              <p><%= item.description %></p>
-              <p class="category">Category: <a href="/categories/<%= item.category_id %>"><%= item.category_name %></a></p>
-              <p class="price">$<%= parseFloat(item.price).toFixed(2) %></p>
-              <p class="stock">In Stock: <%= item.stock %></p>
+              <h3><a href="/items/<%= item.id %>"><%= item.name %></a></h3>
+              <p class="price">$<%= item.price.toFixed(2) %></p>
+              <p class="stock">Stock: <%= item.stock %></p>
+              <p class="category">Category: <%= item.category_name %></p>
               <a href="/items/<%= item.id %>" class="btn btn-small">View Details</a>
+              <% if (isAdmin) { %>
+                <div class="admin-item-actions">
+                  <a href="/items/<%= item.id %>/edit" class="btn btn-small">Edit</a>
+                  <a href="/items/<%= item.id %>/confirm-delete" class="btn btn-small btn-danger">Delete</a>
+                </div>
+              <% } %>
             </div>
           <% }); %>
         <% } else { %>

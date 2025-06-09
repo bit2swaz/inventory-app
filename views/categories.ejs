@@ -13,6 +13,16 @@
     </header>
     
     <main>
+      <% if (isAdmin) { %>
+        <div class="admin-actions">
+          <a href="/categories/new" class="btn btn-success">Create New Category</a>
+          <% if (categories && categories.length > 0) { %>
+            <a href="/items/new" class="btn btn-success">Create New Item</a>
+          <% } %>
+          <a href="/admin/logout" class="btn btn-danger">Logout</a>
+        </div>
+      <% } %>
+      
       <div class="categories-list">
         <% if (categories && categories.length > 0) { %>
           <% categories.forEach(category => { %>
@@ -20,6 +30,12 @@
               <h2><a href="/categories/<%= category.id %>"><%= category.name %></a></h2>
               <p><%= category.description %></p>
               <a href="/categories/<%= category.id %>" class="btn btn-small">View Items</a>
+              <% if (isAdmin) { %>
+                <div class="admin-item-actions">
+                  <a href="/categories/<%= category.id %>/edit" class="btn btn-small">Edit</a>
+                  <a href="/categories/<%= category.id %>/confirm-delete" class="btn btn-small btn-danger">Delete</a>
+                </div>
+              <% } %>
             </div>
           <% }); %>
         <% } else { %>

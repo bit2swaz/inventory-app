@@ -10,21 +10,37 @@
   <div class="container">
     <header>
       <h1><%= category.name %></h1>
-      <p class="description"><%= category.description %></p>
+      <div class="category-description">
+        <p><%= category.description %></p>
+      </div>
     </header>
     
     <main>
-      <h2>Items in this category</h2>
+      <% if (isAdmin) { %>
+        <div class="admin-actions">
+          <a href="/items/new" class="btn btn-success">Add New Item</a>
+          <a href="/categories/<%= category.id %>/edit" class="btn btn-primary">Edit Category</a>
+          <a href="/categories/<%= category.id %>/confirm-delete" class="btn btn-danger">Delete Category</a>
+          <a href="/admin/logout" class="btn">Logout</a>
+        </div>
+      <% } %>
+      
+      <h2>Items in this Category</h2>
       
       <div class="items-list">
         <% if (items && items.length > 0) { %>
           <% items.forEach(item => { %>
             <div class="item-card">
               <h3><a href="/items/<%= item.id %>"><%= item.name %></a></h3>
-              <p><%= item.description %></p>
-              <p class="price">$<%= parseFloat(item.price).toFixed(2) %></p>
-              <p class="stock">In Stock: <%= item.stock %></p>
+              <p class="price">$<%= item.price.toFixed(2) %></p>
+              <p class="stock">Stock: <%= item.stock %></p>
               <a href="/items/<%= item.id %>" class="btn btn-small">View Details</a>
+              <% if (isAdmin) { %>
+                <div class="admin-item-actions">
+                  <a href="/items/<%= item.id %>/edit" class="btn btn-small">Edit</a>
+                  <a href="/items/<%= item.id %>/confirm-delete" class="btn btn-small btn-danger">Delete</a>
+                </div>
+              <% } %>
             </div>
           <% }); %>
         <% } else { %>
@@ -34,7 +50,7 @@
       
       <div class="navigation">
         <a href="/categories" class="btn">Back to Categories</a>
-        <a href="/" class="btn">Back to Home</a>
+        <a href="/" class="btn">Home</a>
       </div>
       
       <div class="theme-toggle">
